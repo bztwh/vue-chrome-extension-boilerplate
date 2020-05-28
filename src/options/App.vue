@@ -8,11 +8,10 @@
 export default {
   data() {
     return {
-      msg: 'Welcome!'
+      msg: 'Welcome!',
     }
-  }
+  },
 }
 </script>
 
-<style lang="stylus">
-</style>
+<style lang="stylus"></style>
