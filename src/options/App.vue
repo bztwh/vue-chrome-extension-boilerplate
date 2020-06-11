@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <h1 @click="send">{{ msg }}</h1>
   </div>
 </template>
 
@@ -8,10 +8,21 @@
 export default {
   data() {
     return {
-      msg: 'Welcome!',
+      msg: '测试',
     }
   },
+  methods: {
+
+  },
+  mounted() {},
 }
+// json
+const temp = [
+  {
+    host: ['', ''],
+    href: ['', ''],
+  },
+]
 </script>
 
 <style lang="stylus"></style>
