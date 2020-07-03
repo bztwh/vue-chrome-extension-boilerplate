@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "bulma-fluent": "^0.3.20",
+    "localforage": "^1.7.4",
+    "lokijs": "^1.5.8",
     "vue": "^2.6.11"
   },
   "description": "vue-chrome-extension-boilerplate",

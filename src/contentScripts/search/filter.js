@@ -21,7 +21,7 @@ function google() {
   document.body.appendChild(style);
   // 遍历列表
   map.forEach(e => {
-    console.log(e);
+    // console.log(e);
     let url = e.querySelector('.r > a').href;
     if (url != null) {
       // 添加dom
