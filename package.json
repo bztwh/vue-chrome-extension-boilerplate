@@ -6,9 +6,11 @@
   },
   "dependencies": {
     "bulma-fluent": "^0.3.20",
+    "dayjs": "^1.8.29",
     "localforage": "^1.7.4",
     "lokijs": "^1.5.8",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vuex": "^3.5.1"
   },
   "description": "vue-chrome-extension-boilerplate",
   "devDependencies": {

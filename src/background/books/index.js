@@ -32,7 +32,7 @@ function loadHandler() {
 class tdb {
   constructor(db) {
     this.db = db;
-    this.template = ['title', 'tags', 'url', 'date']
+    this.template = ['title', 'tags', 'url', 'createDate', 'update']
   }
   /**
    * @param {Array} tags 搜索tag 

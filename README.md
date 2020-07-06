@@ -1,4 +1,5 @@
 使用 vue-chrome-extension-boilerplate
 
-lokijs
-localforage https://localforage.docschina.org/
+[lokijs](http://techfort.github.io/LokiJS/index.html)<br/>
+[localforage](https://localforage.docschina.org/)<br/>
+[dayjs](https://github.com/iamkun/dayjs)
