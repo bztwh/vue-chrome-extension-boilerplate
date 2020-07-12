@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-      <input type="text" v-model="insert.title" placeholder="标题" :ref="insert.title" />
+      <input type="text" v-model="insert.title" placeholder="标题" />
+      <input type="text" v-model="tags" placeholder="标签 空格分割" />
       <button @click="insertBooks()">添加</button>
     </div>
   </div>
@@ -18,14 +19,23 @@ export default {
         url: window.location.href,
         host: /((?<=:\/\/).*?)\//g.exec(window.location.href)[1],
       },
+      tags: '',
     }
+  },
+  computed: {
+    data() {
+      return {
+        ...this.insert,
+        tags: this.tags.split(/\s{1,}/),
+      }
+    },
   },
   methods: {
     insertBooks() {
       sendMessage({
         name: 'insertBooks',
         data: {
-          ...this.insert,
+          ...this.data,
           createDate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
         },
       }).then(res => {
