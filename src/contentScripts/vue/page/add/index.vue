@@ -12,6 +12,9 @@ import { sendMessage } from '../../../utils/message.js'
 import dayjs from 'dayjs'
 export default {
   name: 'add',
+  props: {
+    folderId: Number,
+  },
   data() {
     return {
       insert: {
@@ -32,13 +35,15 @@ export default {
   },
   methods: {
     insertBooks() {
+      console.log(this.folderId)
       sendMessage({
         name: 'insertBooks',
         data: {
           ...this.data,
           createDate: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          folderId: this.folderId,
         },
-      }).then(res => {
+      }).then((res) => {
         console.log(res)
       })
     },

@@ -1,18 +1,20 @@
 <template>
   <div style="pointer-events: auto;">
     <div class="sky-list">
-      <button @click="getData()">刷新</button>
-      <div v-if="isCurrentUrl">已收藏</div>
-      <add></add>
-      <div class="sky-list_container">
-        <folder></folder>
-        <ul class="books-ul">
-          <li class="books-li" v-for="(item, index) in list" :key="index">
-            <a :href="item.url">{{item.title}}{{item.createDate}}</a>
-            <button @click="editBooks(item.$loki)">编辑</button>
-            <button @click="removeBooks(item.$loki,index)">删除</button>
-          </li>
-        </ul>
+      <folder @change="changeChange"></folder>
+      <div>
+        <button @click="getData()">刷新</button>
+        <div v-if="isCurrentUrl">已收藏</div>
+        <add :folder-id="folderId"></add>
+        <div class="sky-list_container">
+          <ul class="books-ul">
+            <li class="books-li" v-for="(item, index) in list" :key="index">
+              <a :href="item.url">{{item.title}}{{item.createDate}}</a>
+              <button @click="editBooks(item.$loki)">编辑</button>
+              <button @click="removeBooks(item.$loki,index)">删除</button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <edit v-if="showEdit" :show.sync="showEdit" :loki="editLoki"></edit>
@@ -40,13 +42,17 @@ export default {
       showEdit: false,
       editLoki: null,
       isCurrentUrl: false,
+      folderId: null,
     }
   },
   methods: {
     getData() {
       sendMessage({
-        name: 'getBooks',
-      }).then(res => {
+        name: 'getAllBooks',
+        data: {
+          folderId: this.folderId,
+        },
+      }).then((res) => {
         console.log(res)
         this.list = res
       })
@@ -56,7 +62,7 @@ export default {
       sendMessage({
         name: 'removeBooks',
         data: [data],
-      }).then(res => {
+      }).then((res) => {
         this.list.splice(index, 1)
       })
     },
@@ -65,13 +71,26 @@ export default {
       this.showEdit = true
       this.editLoki = id
     },
+    changeChange(e) {
+      this.folderId = e?.$loki ?? null
+      console.log({ folderId: this.folderId })
+      sendMessage({
+        name: 'getBooks',
+        data: {
+          folderId: this.folderId,
+        },
+      }).then((res) => {
+        console.log(res)
+        this.list = res
+      })
+    },
   },
   mounted() {
     this.getData()
     sendMessage({
       name: 'booksFindOne',
       data: { url: window.location.href },
-    }).then(res => {
+    }).then((res) => {
       if (res != null) this.isCurrentUrl = true
     })
   },
@@ -83,6 +102,7 @@ export default {
   --sky-opacity: 0.95;
   pointer-events: auto;
   position: relative;
+  display: flex;
   &::after {
     content: '';
     background: #fff;

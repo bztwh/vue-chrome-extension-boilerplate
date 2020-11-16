@@ -50,7 +50,7 @@ class Books extends Base {
   constructor(db) {
     super(db);
     this.db = db;
-    this.template = ['title', 'description', 'tags', 'url', 'createDate', 'update']
+    this.template = ['title', 'description', 'tags', 'url', 'createDate', 'update', 'folderId']
   }
   /**
    * @param {Array} tags 搜索tag 
@@ -136,11 +136,15 @@ function loadHandler() {
 
 export function dbData() {
   return new Promise((resolve, reject) => {
-    let isOutput = setInterval(() => {
-      if (outputDb != null && Object.keys(outputDb).length == dbList.length) {
-        clearInterval(isOutput);
-        resolve(outputDb)
-      }
-    }, 1000)
+    if (outputDb != null && Object.keys(outputDb).length == dbList.length) {
+      resolve(outputDb);
+    } else {
+      let isOutput = setInterval(() => {
+        if (outputDb != null && Object.keys(outputDb).length == dbList.length) {
+          clearInterval(isOutput);
+          resolve(outputDb)
+        }
+      }, 1000)
+    }
   })
 }

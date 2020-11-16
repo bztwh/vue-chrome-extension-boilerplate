@@ -1,13 +1,6 @@
 import {
-  load
-} from './search/filter'
-import {
   createAppView,
 } from './vue/index.js'
-/**
- * google屏蔽
- */
-load();
 /**
  * 创建vue
  */
@@ -51,12 +44,6 @@ function sendMessage(val) {
     })
   })
 }
-
-sendMessage({
-  name: 'getBooks'
-}).then(res => {
-  console.log(res);
-})
 // sendMessage({
 //   name: 'insertBooks',
 //   data: {
